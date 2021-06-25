@@ -1,27 +1,24 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Fade from '@material-ui/core/Fade';
 
-import { Animated } from 'components';
+import useWelcome from './useWelcome';
 
-import content from './content';
+const Welcome = () => {
+  const { allContentfulPage } = useWelcome();
+  const data = allContentfulPage.edges[0].node;
 
-const { tagline, title, subtitle } = content;
+  console.log('data', data);
 
-const Welcome = () => (
-  <>
-    <Typography variant='h3' color='textPrimary'>
-      {tagline}
-    </Typography>
-    <Fade in timeout={1000}>
+  return (
+    <>
       <Typography variant='h1' color='textPrimary'>
-        <Animated>{title}</Animated>
+        {data.title}
       </Typography>
-    </Fade>
-    <Typography variant='h3' color='textPrimary'>
-      {subtitle}
-    </Typography>
-  </>
-);
+      <Typography variant='h3' color='textPrimary'>
+        {data.description.description}
+      </Typography>
+    </>
+  )
+};
 
 export default Welcome;
